@@ -8,8 +8,8 @@ ifeq ($(TWRP_EVENT_LOGGING), true)
 endif
 
 splash_sources := \
-    splashmenu.c \
-    ui.c
+    splashmenu.cpp \
+    ui.cpp
 
 ifndef SPLASH_RECOVERY_KEY
   SPLASH_RECOVERY_KEY := KEY_MENU
@@ -52,7 +52,7 @@ LOCAL_STATIC_LIBRARIES := \
 	libcutils \
 	liblog
 
-LOCAL_FORCE_STATIC_EXECUTABLE := true
+#LOCAL_FORCE_STATIC_EXECUTABLE := true
 LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_OUT)/root/../../install-files/etc/safestrap
 
