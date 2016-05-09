@@ -8,8 +8,8 @@ ifeq ($(TWRP_EVENT_LOGGING), true)
 endif
 
 splash_sources := \
-    splashmenu.c \
-    ui.c
+    splashmenu.cpp \
+    ui.cpp
 
 ifndef SPLASH_RECOVERY_KEY
   SPLASH_RECOVERY_KEY := KEY_MENU
@@ -35,28 +35,28 @@ ifeq ($(TW_TARGET_USES_QCOM_BSP), true)
 endif
 
 LOCAL_MODULE := safestrapmenu
-LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_TAGS := eng
 
 LOCAL_SRC_FILES := $(splash_sources)
 
 LOCAL_CFLAGS += -DMAX_ROWS=44 -DMAX_COLS=96
 
+LOCAL_SHARED_LIBRARIES := \
+        libz \
+        libc \
+        libcutils \
+        libpng \
+        libminui_ss
 
 LOCAL_STATIC_LIBRARIES := \
-	libminui_ss \
-	libpixelflinger_static \
-	libpng \
-	libz \
+	libpixelflinger_twrp \
 	libstdc++ \
-	libc \
-	libcutils \
 	liblog
 
-LOCAL_FORCE_STATIC_EXECUTABLE := true
+#LOCAL_FORCE_STATIC_EXECUTABLE := true
 LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_OUT)/root/../../install-files/etc/safestrap
 
 include $(BUILD_EXECUTABLE)
 
 include $(call all-makefiles-under,$(splash_local_path))
-
